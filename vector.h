@@ -6,15 +6,15 @@
 /*   By: nhuber <nhuber@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/30 18:06:48 by nhuber            #+#    #+#             */
-/*   Updated: 2016/06/30 19:01:31 by nhuber           ###   ########.fr       */
+/*   Updated: 2016/07/01 18:05:07 by nhuber           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
-#define VECTOR_H
-#include <stdio.h>
-
-#define VECTOR_CAPACITY_INIT 4
+# define VECTOR_H
+# include <stdio.h>
+# include <stdlib.h>
+# define VECTOR_CAPACITY_INIT 4
 
 typedef struct	s_vector
 {
@@ -22,10 +22,14 @@ typedef struct	s_vector
 	int			capacity;
 	int			size;
 
-	void		(*resize)(struct s_vector *);
 }				t_vector;
 
 t_vector		*vector_construct(int init_capacity);
+void			vector_resize(struct s_vector *v);
+void			vector_add(t_vector *v, void *item);
+void			vector_delone(t_vector *v, int index, void (*del)(void *));
+void			vector_destruct(t_vector *v, void (*del)(void *));
+
 void			*items_cpy(void *dst, const void *src, int size);
 
 #endif
